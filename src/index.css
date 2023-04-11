@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+tr:nth-child(even) {
+  background-color: #e8eaf4;
+}
