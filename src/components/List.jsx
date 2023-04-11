@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 
 function List() {
   const [wfData, setWfData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    setIsLoading(true);
     fetch("https://64307b10d4518cfb0e50e555.mockapi.io/workflow")
       .then((res) => res.json())
-      .then((data) => setWfData(data));
+      .then((data) => {
+        setWfData(data);
+        setIsLoading(false);
+      });
   }, []);
   return (
     <div>
@@ -36,7 +41,7 @@ function List() {
                   scope="row"
                   className="px-6 py-4 font-medium border-2 border-white underline"
                 >
-                  <Link to={`/${wf.id}`}>{wf.name}</Link>
+                  {!isLoading && <Link to={`/${wf.id}`}>{wf.name}</Link>}
                 </th>
                 <td className="px-6 py-4 border-2 border-white">
                   {wf.input_type}
